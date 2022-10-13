@@ -5,34 +5,13 @@ const menuMobile = document.querySelector('.mobile-menu');
 const menuCarritoIcon = document.querySelector('.navbar-shopping-cart');
 const shoppingCartConteiner = document.querySelector('#shoppingCartConteiner');
 const cardContainer = document.querySelector('.cards-container');
+const detallesProducto = document.querySelector('#productDetail');
+const closeProductDetailIcon = document.querySelector('.product-detail-close')
 
 menuEmail.addEventListener('click', toggleDesktopMenu);
 menuBurger.addEventListener('click', toggleMobileMenu);
 menuCarritoIcon.addEventListener('click', toggleCarritoAside);
-
-function toggleDesktopMenu() {
-  desktopMenu.classList.toggle('inactive'); //classList accede a las clases del elemento.
-}
-
-function toggleMobileMenu() {
-  if (shoppingCartConteiner.classList.contains('inactive') == true) {
-    menuMobile.classList.toggle('inactive');
-  } else {
-    shoppingCartConteiner.classList.toggle('inactive');
-    menuMobile.classList.toggle('inactive');
-  }
-
-}
-
-function toggleCarritoAside() {
-  if (menuMobile.classList.contains('inactive') == true) {
-    shoppingCartConteiner.classList.toggle('inactive');
-  } else {
-    shoppingCartConteiner.classList.toggle('inactive');
-    menuMobile.classList.toggle('inactive');
-  }
-
-}
+closeProductDetailIcon.addEventListener('click', closeProductDetail)
 
 const productList = [];
 
@@ -60,6 +39,7 @@ for (product of productList) {
 
   const productImg=document.createElement('img');
   productImg.setAttribute('src',product.image); //se le incluye un atributo al elemento img
+  productImg.addEventListener('click', mostrarDetallesProducto);
   productCard.appendChild(productImg); //insertado en el padre correspondiente
 
   const productInfo = document.createElement('div');
@@ -85,4 +65,41 @@ for (product of productList) {
   productInfoFigure.appendChild(productImgCart);
 
   cardContainer.appendChild(productCard);
+}
+
+function toggleDesktopMenu() {
+  desktopMenu.classList.toggle('inactive'); //classList accede a las clases del elemento.
+  detallesProducto.classList.add('inactive');
+}
+
+function toggleMobileMenu() {
+  if (shoppingCartConteiner.classList.contains('inactive') == true) {
+    menuMobile.classList.toggle('inactive');
+    detallesProducto.classList.add('inactive');
+  } else {
+    shoppingCartConteiner.classList.toggle('inactive');
+    menuMobile.classList.toggle('inactive');
+    detallesProducto.classList.add('inactive');
+  }
+
+}
+
+function toggleCarritoAside() {
+  if (menuMobile.classList.contains('inactive') == true) {
+    shoppingCartConteiner.classList.toggle('inactive');
+    detallesProducto.classList.add('inactive');
+  } else {
+    shoppingCartConteiner.classList.toggle('inactive');
+    menuMobile.classList.toggle('inactive');
+    detallesProducto.classList.add('inactive');
+  }
+
+}
+
+function mostrarDetallesProducto() {
+  detallesProducto.classList.toggle('inactive');
+}
+
+function closeProductDetail(){
+  detallesProducto.classList.add('inactive')
 }
